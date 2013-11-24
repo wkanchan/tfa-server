@@ -1,0 +1,33 @@
+<h1>Listing corporates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Key</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @corporates.each do |corporate| %>
+      <tr>
+        <td><%= corporate.id %></td>
+        <td><%= corporate.name %></td>
+        <td><%= corporate.status %></td>
+        <td><%= corporate.key %></td>
+        <td><%= link_to 'Show', corporate %></td>
+        <td><%= link_to 'Edit', edit_corporate_path(corporate) %></td>
+        <td><%= link_to 'Destroy', corporate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Corporate', new_corporate_path %>
