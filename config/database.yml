@@ -54,7 +54,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: tfa-server_production
+  database: d7lshoa636f234
   pool: 5
   # username: tfa-server
   # password:
