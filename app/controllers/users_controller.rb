@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def sign_in
     puts "***"+params[:otp]
     @result = User.sign_in(params[:corp_id], params[:otp])
+    puts "###"+@result.to_json
   end
 
   # GET /users

@@ -6,13 +6,14 @@ class User < ActiveRecord::Base
     begin
       corporate = Corporate.find(corporate_id)
     rescue
-      return { result: 0, message: 'Invalid corporate ID' }
+      return { result: 0, message: "Invalid corporate ID" }
     end
     corporate_key = corporate.key
+    unescaped_otp = URI.decode(otp).gsub "\\n","\n"
     begin
-      plain = AES.decrypt(otp, corporate_key)
-    rescue
-      return { result: 0, message: 'Invalid key' }
+      plain = AES.decrypt(unescaped_otp, corporate_key)
+    rescue Exception => e
+      return { result: 0, message: "Invalid key or OTP" }
     end
     splitted = plain.split(",")
     user_id = splitted[0]
@@ -34,6 +35,7 @@ class User < ActiveRecord::Base
         new_otp = AES.encrypt(new_plain, corporate_key)
 
         return { result: 1, otp: new_otp }
+        # return { result: 1, otp: otp }
       else
         return { result: 0, message: 'Invalid passcode' }
       end
