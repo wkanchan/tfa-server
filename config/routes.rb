@@ -1,4 +1,6 @@
 TfaServer::Application.routes.draw do
+  post 'users/sign_in' => 'users#sign_in'
+
   resources :users
 
   resources :corporates

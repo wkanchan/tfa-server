@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  def sign_in
+    puts "***"+params[:otp]
+    @result = User.sign_in(params[:corp_id], params[:otp])
+  end
+
   # GET /users
   # GET /users.json
   def index
