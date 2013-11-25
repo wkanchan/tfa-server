@@ -35,7 +35,6 @@ class User < ActiveRecord::Base
         new_otp = AES.encrypt(new_plain, corporate_key)
 
         return { result: 1, otp: new_otp }
-        # return { result: 1, otp: otp }
       else
         return { result: 0, message: 'Invalid passcode' }
       end
