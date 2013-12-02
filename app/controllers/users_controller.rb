@@ -2,8 +2,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def sign_in
+    if params[:user_id].nil? or params[:corp_id].nil? or params[:otp].nil?
+      @result = { result: 0, message: "Not enough parameters." } 
+    else
     # puts "***"+params[:otp]
-    @result = User.sign_in(params[:corp_id], params[:otp])
+      @result = User.sign_in(params[:user_id], params[:corp_id], params[:otp])
+    end
     # puts "###"+@result.to_json
   end
 
